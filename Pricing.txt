@@ -1,0 +1,44 @@
+based on this data, create a excel file for me and also include textual information, make it very professional and formal document.
+
+Category - Starter
+
+1. Azure Blob Storage:
+- Region: UK South
+- Type: Block Blob Storage
+- Performance: Standard
+- Storage Account Type: General Purpose V2
+- File Structure: Hierarchical Namespace
+- Access Tier: Hot
+- Redundancy: ZRS
+- Capacity: 1000GB
+- Operations: Assuming 10X10000 Operations of Write, Read, Iterative Read and Iterative Write individually. Data Retrieval is free of cost.
+- Data Storage Price: First 50TB/Month = $0.038per GB, Next 450 TB/month = $0.0369 per GB, Over 500TB/Month = $0.0353 per GB.
+- Operations Pricing: Write - $0.096 per 10000 operations, read: $0.006 per 10000 operations
+- Cost: $26
+
+2. Azure AI Search:
+- Region: UK South
+- Tier: Basic
+- 1 Unit X 10 Days(What does this mean?)
+- 1 unitx1day cost = $2.42
+- 5000 Queries
+- Query cost: $1x1000 queries (first 1000 free)
+- Cost: $28.5
+
+3. Azure Open AI - Model: gpt-35-turbo(0125 Version)
+- Assuming 1500 tokens per query (70-100 words question) including chunk data
+- Total Tokens: 75,00,000
+- Input Token Price: $0.0005x1000 tokens
+- Output Token Price: $0.0015x1000 tokens
+- Total Cost: $5.75
+
+4. Azure Open AI - Model: embeddings(ada)
+- Token Cost: $0.0001 per 1000 tokens
+- assuming tokens = 30,00,00,000
+- Total Cost: $30
+
+
+Final Total: $90.04
+
+
+based on this data, create a excel file for me and also include textual information, make it very professional and formal document. Include all the data I have shared, do not miss a single information.
