@@ -381,68 +381,52 @@ const RAGChatbot = () => {
   return (
     <div className={`flex flex-col h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-white' : 'bg-gradient-to-br from-slate-50 to-blue-50'}`}>
       {/* Header/Navbar with branding and controls */}
-      <div className={`relative border-b transition-all duration-300 ${darkMode ? 'bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 border-gray-700/50' : 'bg-gradient-to-r from-blue-50 via-white to-blue-50 border-gray-200/80'}`}>
-        {/* Subtle pattern overlay */}
-        <div className={`absolute inset-0 opacity-30 ${darkMode ? 'bg-gradient-to-br from-blue-900/20 via-transparent to-purple-900/20' : 'bg-gradient-to-br from-blue-500/5 via-transparent to-indigo-500/5'}`}></div>
-        <div className="relative px-8 py-4">
-          <div className="flex items-center justify-between">
-            {/* Brand Section */}
-            <div className="flex items-center gap-5">
-              <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
-                <div className="relative w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-xl">
-                  <img 
-                    src="/Barclays Logo.png" 
-                    alt="Barclays Logo" 
-                    className="w-10 h-10 object-contain"
-                    onError={(e) => {
-                      e.currentTarget.style.display = 'none';
-                      const parent = e.currentTarget.parentElement;
-                      if (parent) {
-                        parent.classList.remove('bg-white');
-                        parent.classList.add('bg-gradient-to-br', 'from-blue-600', 'via-blue-700', 'to-indigo-800');
-                        parent.innerHTML = '<svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>';
-                      }
-                    }}
-                  />
-                </div>
-              </div>
-              <div>
-                <h1 className={`text-2xl font-bold tracking-tight bg-gradient-to-r ${darkMode ? 'from-white to-gray-200 bg-clip-text text-transparent' : 'from-gray-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent'}`}>
-                  Barclays RAG Assistant
-                </h1>
+      <div className={`relative border-b shadow-md z-10 ${darkMode ? 'bg-[#10131a] border-gray-800' : 'bg-white border-gray-300'}`}>
+        {/* Barclays blue accent bar */}
+        <div className="absolute bottom-0 left-0 w-full h-1 bg-blue-600 rounded-b-xl shadow-lg" />
+        <div className="relative px-10 py-5 flex items-center justify-between min-h-[88px]">
+          {/* Brand Section */}
+          <div className="flex items-center gap-7">
+            <div className="relative group">
+              <div className="absolute -inset-2 bg-blue-100 dark:bg-blue-900 rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-300"></div>
+              <div className="relative w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-xl border border-blue-100 dark:border-blue-800 group-hover:scale-105 transition-transform">
+                <img 
+                  src="/Barclays Logo.png" 
+                  alt="Barclays Logo" 
+                  className="w-12 h-12 object-contain"
+                  style={{ borderRadius: '16px' }}
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                    const parent = e.currentTarget.parentElement;
+                    if (parent) {
+                      parent.classList.remove('bg-white');
+                      parent.classList.add('bg-blue-700');
+                      parent.innerHTML = '<svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>';
+                    }
+                  }}
+                />
               </div>
             </div>
-            {/* Controls Section */}
-            <div className="flex items-center gap-4">
-              <div className={`flex items-center gap-2 p-2 rounded-xl backdrop-blur-sm shadow-lg ${darkMode ? 'bg-gray-800/80 border border-gray-700/50' : 'bg-white/80 border border-gray-200/50'}`}> 
-                <button
-                  onClick={() => {
-                    if (audioEnabled && 'speechSynthesis' in window) {
-                      window.speechSynthesis.cancel();
-                    }
-                    setAudioEnabled(!audioEnabled);
-                  }}
-                  className={`relative p-2.5 rounded-lg transition-all duration-300 group ${audioEnabled ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md' : darkMode ? 'text-gray-400 hover:text-white hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-600' : 'text-gray-600 hover:text-blue-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 hover:shadow-md'}`}
-                  title="Toggle Text-to-Speech"
-                >
-                  {audioEnabled && (
-                    <div className="absolute inset-0 bg-blue-400/20 rounded-lg animate-pulse"></div>
-                  )}
-                  <div className="relative">
-                    {audioEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
-                  </div>
-                </button>
-                <button
-                  onClick={() => setDarkMode(!darkMode)}
-                  className={`relative p-2.5 rounded-lg transition-all duration-300 group ${darkMode ? 'text-gray-400 hover:text-white hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-600' : 'text-gray-600 hover:text-blue-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 hover:shadow-md'}`}
-                  title="Toggle Dark Mode"
-                >
-                  <div className="relative">
-                    {darkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-                  </div>
-                </button>
+            <div className="flex flex-col">
+              <h1 className={`text-3xl font-extrabold tracking-wide font-sans ${darkMode ? 'text-white' : 'text-gray-900'}`}>Barclays Agent</h1>
+              <span className={`text-base mt-1 tracking-wide ${darkMode ? 'text-blue-400' : 'text-blue-700'}`}>MCP Integrated</span>
+            </div>
+          </div>
+          {/* Controls Section + Help + Avatar */}
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => setDarkMode(!darkMode)}
+              className={`relative p-2.5 rounded-lg transition-all duration-200 group border border-transparent
+                ${darkMode ? 'text-blue-400 hover:text-white hover:bg-gray-800/70 hover:border-blue-700' : 'text-gray-600 hover:text-blue-700 hover:bg-blue-50 hover:border-blue-300'}`}
+              title="Toggle Dark Mode"
+            >
+              <div className="relative">
+                {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
               </div>
+            </button>
+            {/* User avatar */}
+            <div className={`w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center ml-2 shadow border ${darkMode ? 'border-blue-800' : 'border-blue-300'} text-white font-bold text-lg select-none`}>
+              AJ
             </div>
           </div>
         </div>
@@ -462,19 +446,50 @@ const RAGChatbot = () => {
         </div>
       )}
       {/* Messages Area */}
-      <div className="flex-1 overflow-y-auto p-6 space-y-6">
+      <div className="flex-1 overflow-y-auto p-6 space-y-8">
         {messages.map(message => (
           <div key={message.id} className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}>
             <div className={`max-w-3xl w-full ${message.type === 'user' ? 'ml-16' : 'mr-16'}`}>
-              <div className={`${message.type === 'user' ? (darkMode ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white ml-auto shadow-lg' : 'bg-gradient-to-r from-blue-600 to-blue-700 text-white ml-auto') : (darkMode ? 'bg-gray-800/95 border border-gray-700/60 text-white shadow-xl' : 'bg-white/90 backdrop-blur-sm border border-gray-200/60 shadow-lg')} rounded-xl p-4 transition-all hover:shadow-xl`}>
-                <div className={`leading-relaxed ${message.type === 'user' ? 'text-white' : darkMode ? 'text-gray-100' : 'text-gray-800'}`}>
+              <div
+                className={`relative rounded-2xl p-5 transition-all border shadow-md
+                  ${message.type === 'user'
+                    ? (darkMode
+                        ? 'bg-blue-950 text-blue-100 border-blue-800 hover:bg-blue-900/80'
+                        : 'bg-blue-50 text-blue-900 border-blue-300 hover:bg-blue-100')
+                    : (darkMode
+                        ? 'bg-gray-900/90 text-gray-100 border-gray-700 hover:bg-gray-800/70'
+                        : 'bg-white text-gray-900 border-gray-300 hover:bg-gray-50')
+                  }
+                  hover:scale-[1.01] hover:shadow-lg
+                `}
+              >
+                {/* Avatar/Icon */}
+                <div className="absolute -top-5 left-0 flex items-center">
+                  {message.type === 'bot' ? (
+                    <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center shadow border border-blue-200 dark:border-blue-700 -ml-4">
+                      <img
+                        src="/Barclays Logo.png"
+                        alt="Bot"
+                        className="w-6 h-6 object-contain"
+                        style={{ borderRadius: '50%' }}
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-9 h-9 rounded-full bg-blue-500 flex items-center justify-center shadow border border-blue-300 -ml-4">
+                      <User className="w-5 h-5 text-white" />
+                    </div>
+                  )}
+                </div>
+                {/* Message Content */}
+                <div className={`leading-relaxed min-h-[32px] ${message.type === 'user' ? (darkMode ? 'text-blue-100' : 'text-blue-900') : (darkMode ? 'text-gray-100' : 'text-gray-900')} pl-12`}>
                   {message.content}
                   {message.type === 'bot' && typeof message.tool_calls_made !== 'undefined' && (
                     <div className="mt-2 text-xs text-blue-600">Tool Calls Made: {message.tool_calls_made}</div>
                   )}
                 </div>
-                <div className="flex items-center gap-3 text-xs mt-2 text-gray-400">
-                  <span>{message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                {/* Timestamp bottom-right */}
+                <div className="absolute bottom-3 right-5 text-xs text-gray-500 select-none">
+                  {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                 </div>
               </div>
             </div>
@@ -494,37 +509,39 @@ const RAGChatbot = () => {
         <div ref={messagesEndRef} />
       </div>
       {/* Input Area */}
-      <div className={`relative mx-auto w-1/2 rounded-lg shadow-xl transition-all duration-300 mb-4 ${darkMode ? 'backdrop-blur-md bg-gray-800/90 border border-gray-600/50 hover:bg-gray-800/95 hover:shadow-2xl' : 'backdrop-blur-md bg-white/70 border border-white/20 hover:bg-white/80 hover:shadow-2xl'}`}>
-        <div className="px-6 py-4">
-          <div className="max-w-2xl mx-auto">
-            <div className="flex items-center gap-2">
-              <div className="flex-1 relative">
-                <textarea
-                  ref={inputRef}
-                  value={inputMessage}
-                  onChange={(e) => setInputMessage(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  placeholder="Ask me anything... (Shift+Enter for new line)"
-                  className={`w-full px-4 py-3 pr-20 border rounded-lg focus:outline-none transition-all text-sm resize-none ${darkMode ? 'bg-gray-700/90 border-gray-500/50 text-white placeholder-gray-400 focus:ring-1 focus:ring-blue-400 focus:border-blue-400 focus:bg-gray-700' : 'bg-white/90 border-gray-300 text-gray-900 placeholder-gray-500 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 focus:bg-white'}`}
-                  rows={1}
-                  style={{ minHeight: '44px', maxHeight: '120px', overflow: 'hidden' }}
-                  onInput={(e) => {
-                    e.currentTarget.style.height = 'auto';
-                    e.currentTarget.style.height = Math.min(Math.max(e.currentTarget.scrollHeight, 44), 120) + 'px';
-                  }}
-                  disabled={isLoading}
-                />
-                <button
-                  onClick={() => handleSendMessage()}
-                  disabled={!inputMessage.trim() || isLoading}
-                  className={`absolute right-2 top-1/2 transform -translate-y-1/2 p-1.5 rounded transition-colors ${!inputMessage.trim() || isLoading ? (darkMode ? 'text-gray-500 cursor-not-allowed' : 'text-gray-400 cursor-not-allowed') : (darkMode ? 'text-blue-400 hover:text-blue-300 hover:bg-blue-900/30' : 'text-blue-600 hover:text-blue-700 hover:bg-blue-50')}`}
-                  title="Send Message"
-                >
-                  {isLoading ? (<div className="animate-spin rounded-full h-4 w-4 border-b-2 border-current"></div>) : (<Send className="w-4 h-4" />)}
-                </button>
-              </div>
-            </div>
-          </div>
+      <div className="w-full max-w-2xl mx-auto mt-2 mb-6">
+        <div className="border-t border-gray-300 dark:border-gray-800 mb-4" />
+        <div className={`flex items-end ${darkMode ? 'bg-gray-900' : 'bg-gray-50'} border border-gray-300 dark:border-gray-700 rounded-2xl shadow-md px-4 py-2 transition-all focus-within:ring-2 focus-within:ring-blue-500`}>
+          <textarea
+            ref={inputRef}
+            value={inputMessage}
+            onChange={(e) => setInputMessage(e.target.value)}
+            onKeyPress={handleKeyPress}
+            placeholder="Type your message and press Enter…"
+            className={`flex-1 bg-transparent border-none outline-none resize-none text-sm py-2 px-0 min-h-[44px] max-h-[120px] transition-all ${darkMode ? 'text-gray-100 placeholder-gray-500' : 'text-gray-900 placeholder-gray-400'}`}
+            rows={1}
+            style={{ minHeight: '44px', maxHeight: '120px', overflow: 'hidden' }}
+            onInput={e => {
+              e.currentTarget.style.height = 'auto';
+              e.currentTarget.style.height = Math.min(Math.max(e.currentTarget.scrollHeight, 44), 120) + 'px';
+            }}
+            disabled={isLoading}
+            aria-label="Chat message input"
+          />
+          <button
+            onClick={() => handleSendMessage()}
+            disabled={!inputMessage.trim() || isLoading}
+            className={`ml-3 p-2 rounded-lg transition-colors duration-200 flex items-center justify-center
+              ${!inputMessage.trim() || isLoading
+                ? (darkMode ? 'bg-gray-800 text-gray-500 cursor-not-allowed' : 'bg-gray-200 text-gray-400 cursor-not-allowed')
+                : 'bg-blue-600 text-white hover:bg-blue-700 active:scale-95'}
+            `}
+            title="Send Message"
+          >
+            {isLoading
+              ? <div className="animate-spin h-5 w-5 border-b-2 border-white rounded-full"></div>
+              : <Send className="w-5 h-5" />}
+          </button>
         </div>
       </div>
     </div>
